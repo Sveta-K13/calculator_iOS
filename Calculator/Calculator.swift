@@ -19,6 +19,7 @@ class Calculator {
     var operand_1:Double = 0
     var isFirstDigit = true
     var isDecimal = false
+    var isPositive = true
     var isWaitOperand = false
     
     var displayText: String {
@@ -56,18 +57,29 @@ class Calculator {
         if digit != "0" {
             isFirstDigit = false
         }
+//        if isFirstDigit {
+//            isPositive = true
+//        }
     }
     
     func decimalPoint() {
         if  !isDecimal {
-            displayText = isFirstDigit ? "0," : displayText + ","
+            let sign: String = isPositive ? "" : "-"
+            displayText = isFirstDigit ? sign + "0," : displayText + ","
             isFirstDigit = false
             isDecimal = true
     
         }
     }
 
-
+    func sign() {
+        if !isWaitOperand {
+            let curNum = displayText.characters.split{$0 == "-"}.map(String.init)
+            displayText = isPositive ? "-" + curNum[0] : curNum[0]
+            isPositive = !isPositive
+        }
+        
+    }
     
     func chooseOperation(operation:String) {
         isDecimal = false
@@ -83,6 +95,7 @@ class Calculator {
 
     func clear() {
         displayValue = 0
+        isPositive = true
     }
     
     func calculate() {
@@ -95,6 +108,7 @@ class Calculator {
         case "-":displayValue = operand_1 - displayValue
         default:break
         }
+        isPositive = (displayValue >= 0)
     }
 
 }

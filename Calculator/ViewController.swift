@@ -5,7 +5,7 @@ private let SCREEN_W:CGFloat = UIScreen.mainScreen().bounds.width
 private let MARGIN:CGFloat = 10
 private let BTN_W:CGFloat = (SCREEN_W / 4) - MARGIN * 2
 private let LABEL_W:CGFloat = SCREEN_W - MARGIN * 2
-private let BTN_RES_W:CGFloat = SCREEN_W / 2 - MARGIN * 2
+private let BTN_RES_W:CGFloat = SCREEN_W / 4 - MARGIN * 2
 private let BTN_CANCEL_W:CGFloat = SCREEN_W / 4 * 3 - MARGIN * 2
 private let BTN_TAB:CGFloat = MARGIN * 2 + BTN_W
 private let BTN_TAB_H:CGFloat = MARGIN + BTN_W
@@ -161,6 +161,14 @@ class ViewController: UIViewController {
         return v
     }()
     
+    lazy var buttonSign: UIButton = {
+        let v = UIButton(frame: CGRect(x: (BTN_TAB * 2 + MARGIN), y: (BTN_TOP_LINE + BTN_TAB_H * 4), width: BTN_W, height: BTN_W))
+        v.setTitle("+/-", forState: .Normal)
+        v.addTarget(self, action: "sign", forControlEvents: .TouchUpInside)
+        v.backgroundColor = BTN_OP_COLOR
+        return v
+    }()
+    
     lazy var buttonCancel: UIButton = {
         let v = UIButton(frame: CGRect(x: (BTN_TAB * 0 + MARGIN), y: (BTN_TOP_LINE + BTN_TAB_H * 0), width: BTN_CANCEL_W, height: BTN_W))
         v.setTitle("clear", forState: .Normal)
@@ -170,7 +178,7 @@ class ViewController: UIViewController {
     }()
     
     lazy var buttonResult: UIButton = {
-        let v = UIButton(frame: CGRect(x: (BTN_TAB * 2 + MARGIN), y: (BTN_TOP_LINE + BTN_TAB_H * 4), width: BTN_RES_W, height: BTN_W))
+        let v = UIButton(frame: CGRect(x: (BTN_TAB * 3 + MARGIN), y: (BTN_TOP_LINE + BTN_TAB_H * 4), width: BTN_RES_W, height: BTN_W))
         v.setTitle("=", forState: .Normal)
         v.addTarget(self, action: "calculate", forControlEvents: .TouchUpInside)
         v.backgroundColor = BTN_RES_COLOR
@@ -191,6 +199,10 @@ class ViewController: UIViewController {
         calculator.clear()
     }
  
+    func sign() {
+        calculator.sign()
+    }
+    
     func calculate() {
         calculator.calculate()
     }
@@ -228,6 +240,7 @@ class ViewController: UIViewController {
         view.addSubview(buttonMulti)
         view.addSubview(buttonDivision)
         view.addSubview(buttonPoint)
+        view.addSubview(buttonSign)
         view.addSubview(buttonCancel)
         view.addSubview(buttonResult)
         
