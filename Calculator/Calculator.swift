@@ -33,10 +33,17 @@ class Calculator {
     
     var displayValue: Double {
         get {
-            return NSNumberFormatter().numberFromString( displayText )!.doubleValue
+            let obj = NSNumberFormatter().numberFromString( displayText )
+            if let _ = obj as? Double {
+                return obj!.doubleValue
+            }
+            else {
+                return 0.0
+            }
+            
         }
         set {
-            displayText = newValue.formatted // now show int
+            displayText = newValue.formatted
             isFirstDigit = true
             operation = "="
             
