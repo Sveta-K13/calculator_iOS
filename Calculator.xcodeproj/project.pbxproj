@@ -13,6 +13,7 @@
 		C41DF5CA1C2E92E700A6B482 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C41DF5C91C2E92E700A6B482 /* Assets.xcassets */; };
 		C41DF5CD1C2E92E700A6B482 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C41DF5CB1C2E92E700A6B482 /* LaunchScreen.storyboard */; };
 		C41DF5D51C2EACF400A6B482 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41DF5D41C2EACF400A6B482 /* Calculator.swift */; };
+		C41DF5D71C3087AF00A6B482 /* UIBorderedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41DF5D61C3087AF00A6B482 /* UIBorderedLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		C41DF5CC1C2E92E700A6B482 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C41DF5CE1C2E92E700A6B482 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C41DF5D41C2EACF400A6B482 /* Calculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
+		C41DF5D61C3087AF00A6B482 /* UIBorderedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBorderedLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				C41DF5C91C2E92E700A6B482 /* Assets.xcassets */,
 				C41DF5CB1C2E92E700A6B482 /* LaunchScreen.storyboard */,
 				C41DF5CE1C2E92E700A6B482 /* Info.plist */,
+				C41DF5D61C3087AF00A6B482 /* UIBorderedLabel.swift */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C41DF5C51C2E92E700A6B482 /* ViewController.swift in Sources */,
+				C41DF5D71C3087AF00A6B482 /* UIBorderedLabel.swift in Sources */,
 				C41DF5C31C2E92E700A6B482 /* AppDelegate.swift in Sources */,
 				C41DF5D51C2EACF400A6B482 /* Calculator.swift in Sources */,
 			);

@@ -24,10 +24,11 @@ class ViewController: UIViewController {
     
     
  
-    lazy var displayLabel: UILabel = {
-        let v = UILabel(frame: CGRect(x: MARGIN, y: MARGIN * 2, width: LABEL_W, height: LABEL_H))
+    lazy var displayLabel: UIBorderedLabel = {
+        let v = UIBorderedLabel(frame: CGRect(x: MARGIN, y: MARGIN * 2, width: LABEL_W, height: LABEL_H))
         v.text = "0"
         v.textAlignment = NSTextAlignment.Right
+        v.rightInset = MARGIN
         v.layer.cornerRadius = 5
         v.layer.borderWidth = 1
         v.layer.borderColor = UIColor.blackColor().CGColor
