@@ -9,34 +9,43 @@
 import UIKit
 
 private let SCREEN_W:CGFloat = UIScreen.mainScreen().bounds.width
-private let MARGIN:CGFloat = 10;
+private let MARGIN:CGFloat = 10
 private let BTN_W:CGFloat = (SCREEN_W / 4) - MARGIN * 2
+private let BTN_RES_W:CGFloat = SCREEN_W - MARGIN * 2
 private let BTN_TAB:CGFloat = MARGIN * 2 + BTN_W
 private let BTN_TAB_H:CGFloat = MARGIN + BTN_W
-private let LABEL_H:CGFloat = 100
-private let BTN_TOP_LINE:CGFloat = MARGIN + LABEL_H
-//private let BTN_TOP_LINE:CGFloat = MARGIN + LABEL_H
+private let LABEL_H:CGFloat = 80
+private let BTN_TOP_LINE:CGFloat = MARGIN * 3 + LABEL_H
+private let BTN_COLOR = UIColor.blueColor()
+private let BTN_OP_COLOR = UIColor.blueColor()
+private let BTN_CANCEL_COLOR = UIColor.redColor()
+private let BTN_RES_COLOR = UIColor.greenColor()
+private let BTN_OP_TEXT_COLOR = UIColor.cyanColor()
 
-//result on ViewController too ????
 
 class ViewController: UIViewController {
     
-    var calculator = Calculator();
+    var calculator = Calculator(); // culculate
     
-    lazy var label: UILabel = {
-        let v = UILabel(frame: CGRect(x: MARGIN, y: MARGIN, width: SCREEN_W-16, height: LABEL_H))
+    
+ 
+    lazy var displayLabel: UILabel = {
+        let v = UILabel(frame: CGRect(x: MARGIN, y: MARGIN * 2, width: SCREEN_W-16, height: LABEL_H))
         v.text = "0"
         v.textAlignment = NSTextAlignment.Right
+        v.layer.cornerRadius = 5
+        v.layer.borderWidth = 1
+        v.layer.borderColor = UIColor.blackColor().CGColor
+        v.font = UIFont.systemFontOfSize(30)
         return v
     }()
-    
     
     lazy var button1: UIButton = {
         let v = UIButton(frame: CGRect(x: MARGIN, y: BTN_TOP_LINE, width: BTN_W, height: BTN_W))
         v.setTitle("1", forState: .Normal)
-//        v.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        v.addTarget(self, action: "viewNumber:", forControlEvents: .TouchUpInside)
-        v.backgroundColor = UIColor.blueColor()
+        v.addTarget(self, action: "accumulate:", forControlEvents: .TouchUpInside)
+        v.backgroundColor = BTN_COLOR
+        v.tag = 1
         return v
     }()
     
@@ -44,9 +53,8 @@ class ViewController: UIViewController {
         let v = UIButton(frame: CGRect(x: (BTN_TAB + MARGIN), y: BTN_TOP_LINE, width: BTN_W, height: BTN_W))
         v.setTitle("2", forState: .Normal)
 //        v.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        v.addTarget(self, action: "viewNumber:", forControlEvents: .TouchUpInside)
-        v.backgroundColor = UIColor.blueColor()
-        //        v.background = UIColor().
+        v.addTarget(self, action: "accumulate:", forControlEvents: .TouchUpInside)
+        v.backgroundColor = BTN_COLOR
         return v
     }()
     
@@ -54,9 +62,8 @@ class ViewController: UIViewController {
         let v = UIButton(frame: CGRect(x: (BTN_TAB * 2 + MARGIN), y: BTN_TOP_LINE, width: BTN_W, height: BTN_W))
         v.setTitle("3", forState: .Normal)
 //        v.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        v.addTarget(self, action: "viewNumber:", forControlEvents: .TouchUpInside)
-        v.backgroundColor = UIColor.blueColor()
-        //        v.background = UIColor().
+        v.addTarget(self, action: "accumulate:", forControlEvents: .TouchUpInside)
+        v.backgroundColor = BTN_COLOR
         return v
     }()
     
@@ -64,8 +71,8 @@ class ViewController: UIViewController {
         let v = UIButton(frame: CGRect(x: MARGIN, y: (BTN_TOP_LINE + BTN_TAB_H), width: BTN_W, height: BTN_W))
         v.setTitle("4", forState: .Normal)
         //        v.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        v.addTarget(self, action: "viewNumber:", forControlEvents: .TouchUpInside)
-        v.backgroundColor = UIColor.blueColor()
+        v.addTarget(self, action: "accumulate:", forControlEvents: .TouchUpInside)
+        v.backgroundColor = BTN_COLOR
         return v
     }()
     
@@ -73,9 +80,8 @@ class ViewController: UIViewController {
         let v = UIButton(frame: CGRect(x: (BTN_TAB * 1 + MARGIN), y: (BTN_TOP_LINE + BTN_TAB_H), width: BTN_W, height: BTN_W))
         v.setTitle("5", forState: .Normal)
         //        v.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        v.addTarget(self, action: "viewNumber:", forControlEvents: .TouchUpInside)
-        v.backgroundColor = UIColor.blueColor()
-        //        v.background = UIColor().
+        v.addTarget(self, action: "accumulate:", forControlEvents: .TouchUpInside)
+        v.backgroundColor = BTN_COLOR
         return v
     }()
     
@@ -83,8 +89,8 @@ class ViewController: UIViewController {
         let v = UIButton(frame: CGRect(x: (BTN_TAB * 2 + MARGIN), y: (BTN_TOP_LINE + BTN_TAB_H), width: BTN_W, height: BTN_W))
         v.setTitle("6", forState: .Normal)
         //        v.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        v.addTarget(self, action: "viewNumber:", forControlEvents: .TouchUpInside)
-        v.backgroundColor = UIColor.blueColor()
+        v.addTarget(self, action: "accumulate:", forControlEvents: .TouchUpInside)
+        v.backgroundColor = BTN_COLOR
         //        v.background = UIColor().
         return v
     }()
@@ -93,9 +99,8 @@ class ViewController: UIViewController {
         let v = UIButton(frame: CGRect(x: MARGIN, y: (BTN_TOP_LINE + BTN_TAB_H * 2), width: BTN_W, height: BTN_W))
         v.setTitle("7", forState: .Normal)
         //        v.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        v.addTarget(self, action: "viewNumber:", forControlEvents: .TouchUpInside)
-        v.backgroundColor = UIColor.blueColor()
-        //        v.background = UIColor().
+        v.addTarget(self, action: "accumulate:", forControlEvents: .TouchUpInside)
+        v.backgroundColor = BTN_COLOR
         return v
     }()
     
@@ -103,9 +108,8 @@ class ViewController: UIViewController {
         let v = UIButton(frame: CGRect(x: (BTN_TAB * 1 + MARGIN), y: (BTN_TOP_LINE + BTN_TAB_H * 2), width: BTN_W, height: BTN_W))
         v.setTitle("8", forState: .Normal)
         //        v.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        v.addTarget(self, action: "viewNumber:", forControlEvents: .TouchUpInside)
-        v.backgroundColor = UIColor.blueColor()
-        //        v.background = UIColor().
+        v.addTarget(self, action: "accumulate:", forControlEvents: .TouchUpInside)
+        v.backgroundColor = BTN_COLOR
         return v
     }()
     
@@ -113,9 +117,8 @@ class ViewController: UIViewController {
         let v = UIButton(frame: CGRect(x: (BTN_TAB * 2 + MARGIN), y: (BTN_TOP_LINE + BTN_TAB_H * 2), width: BTN_W, height: BTN_W))
         v.setTitle("9", forState: .Normal)
         //        v.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        v.addTarget(self, action: "viewNumber:", forControlEvents: .TouchUpInside)
-        v.backgroundColor = UIColor.blueColor()
-        //        v.background = UIColor().
+        v.addTarget(self, action: "accumulate:", forControlEvents: .TouchUpInside)
+        v.backgroundColor = BTN_COLOR
         return v
     }()
     
@@ -123,18 +126,18 @@ class ViewController: UIViewController {
         let v = UIButton(frame: CGRect(x: (BTN_TAB * 1 + MARGIN), y: (BTN_TOP_LINE + BTN_TAB_H * 3), width: BTN_W, height: BTN_W))
         v.setTitle("0", forState: .Normal)
         //        v.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        v.addTarget(self, action: "viewNumber:", forControlEvents: .TouchUpInside)
-        v.backgroundColor = UIColor.blueColor()
+        v.addTarget(self, action: "accumulate:", forControlEvents: .TouchUpInside)
+        v.backgroundColor = BTN_COLOR
         //        v.background = UIColor().
         return v
     }()
-    
+ //////////////////////////////////OP
     lazy var buttonPlus: UIButton = {
         let v = UIButton(frame: CGRect(x: (BTN_TAB * 3 + MARGIN), y: BTN_TOP_LINE, width: BTN_W, height: BTN_W))
         v.setTitle("+", forState: .Normal)
-        //        v.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        v.addTarget(self, action: "viewNumber:", forControlEvents: .TouchUpInside)
-        v.backgroundColor = UIColor.blueColor()
+        v.titleLabel?.textColor = BTN_OP_TEXT_COLOR
+        v.addTarget(self, action: "chooseOperation:", forControlEvents: .TouchUpInside)
+        v.backgroundColor = BTN_OP_COLOR
         //        v.background = UIColor().
         return v
     }()
@@ -142,59 +145,95 @@ class ViewController: UIViewController {
     lazy var buttonMinus: UIButton = {
         let v = UIButton(frame: CGRect(x: (BTN_TAB * 3 + MARGIN), y: (BTN_TOP_LINE + BTN_TAB_H), width: BTN_W, height: BTN_W))
         v.setTitle("-", forState: .Normal)
-        //        v.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        v.addTarget(self, action: "viewNumber:", forControlEvents: .TouchUpInside)
-        v.backgroundColor = UIColor.blueColor()
+        v.titleLabel?.textColor = BTN_OP_TEXT_COLOR
+        v.addTarget(self, action: "chooseOperation:", forControlEvents: .TouchUpInside)
+        v.backgroundColor = BTN_OP_COLOR
         //        v.background = UIColor().
         return v
     }()
     
     lazy var buttonMulti: UIButton = {
         let v = UIButton(frame: CGRect(x: (BTN_TAB * 3 + MARGIN), y: (BTN_TOP_LINE + BTN_TAB_H * 2), width: BTN_W, height: BTN_W))
-        v.setTitle("*", forState: .Normal)
-        //        v.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        v.addTarget(self, action: "viewNumber:", forControlEvents: .TouchUpInside)
-        v.backgroundColor = UIColor.blueColor()
+        v.setTitle("×", forState: .Normal)
+        v.titleLabel?.textColor = BTN_OP_TEXT_COLOR
+        v.addTarget(self, action: "chooseOperation:", forControlEvents: .TouchUpInside)
+        v.backgroundColor = BTN_OP_COLOR
         //        v.background = UIColor().
         return v
     }()
     
     lazy var buttonDivision: UIButton = {
         let v = UIButton(frame: CGRect(x: (BTN_TAB * 3 + MARGIN), y: (BTN_TOP_LINE + BTN_TAB_H * 3), width: BTN_W, height: BTN_W))
-        v.setTitle("/", forState: .Normal)
+        v.setTitle("÷", forState: .Normal)
+        v.titleLabel?.textColor = BTN_OP_TEXT_COLOR
+        v.addTarget(self, action: "chooseOperation:", forControlEvents: .TouchUpInside)
+        v.backgroundColor = BTN_OP_COLOR
+        //        v.background = UIColor().
+        return v
+    }()
+    
+//    lazy var buttonPoint: UIButton = {
+//        let v = UIButton(frame: CGRect(x: (BTN_TAB * 0 + MARGIN), y: (BTN_TOP_LINE + BTN_TAB_H * 3), width: BTN_W, height: BTN_W))
+//        v.setTitle(".", forState: .Normal)
+//        //        v.setTitleColor(UIColor.blackColor(), forState: .Normal)
+//        v.addTarget(self, action: "viewNumber:", forControlEvents: .TouchUpInside)
+//        v.backgroundColor = BTN_OP_COLOR
+//        //        v.background = UIColor().
+//        return v
+//    }()
+    
+    lazy var buttonCancel: UIButton = {
+        let v = UIButton(frame: CGRect(x: (BTN_TAB * 2 + MARGIN), y: (BTN_TOP_LINE + BTN_TAB_H * 3), width: BTN_W, height: BTN_W))
+        v.setTitle("clear", forState: .Normal)
         //        v.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        v.addTarget(self, action: "viewNumber:", forControlEvents: .TouchUpInside)
-        v.backgroundColor = UIColor.blueColor()
+        v.addTarget(self, action: "clear", forControlEvents: .TouchUpInside)
+        v.backgroundColor = BTN_CANCEL_COLOR
         //        v.background = UIColor().
         return v
     }()
     
     lazy var buttonResult: UIButton = {
-        let v = UIButton(frame: CGRect(x: (BTN_TAB * 3 + MARGIN), y: (BTN_TOP_LINE + BTN_TAB_H * 4), width: BTN_W, height: BTN_W))
+        let v = UIButton(frame: CGRect(x: (BTN_TAB * 0 + MARGIN), y: (BTN_TOP_LINE + BTN_TAB_H * 4), width: BTN_RES_W, height: BTN_W))
         v.setTitle("=", forState: .Normal)
         //        v.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        v.addTarget(self, action: "viewNumber:", forControlEvents: .TouchUpInside)
-        v.backgroundColor = UIColor.blueColor()
+        v.addTarget(self, action: "calculate", forControlEvents: .TouchUpInside)
+        v.backgroundColor = BTN_RES_COLOR
         //        v.background = UIColor().
         return v
     }()
     
     
-    func viewNumber(b:UIButton) { // save user choise & calculate it then
-        
-        label.text = b.titleLabel?.text; //???
-        calculator.calculate(12)
+    func accumulate(b:UIButton) {
+        let text = b.titleLabel?.text
+        calculator.accumulate(text!)
+    }
+    
+    func clear() {
+        calculator.clear()
+    }
+ 
+    func calculate() {
+        calculator.calculate()
+    }
+    
+    func chooseOperation(b:UIButton) {
+        let text = b.titleLabel?.text
+        calculator.chooseOperation(text!)
     }
     
     func setText(text:String) {
-        label.text = "dsf"
+        displayLabel.text = text
+    }
+    
+    func getText()-> String {
+        return displayLabel.text!
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         calculator.viewController = self
-        view.addSubview(label)
+        view.addSubview(displayLabel)
         view.addSubview(button1)
         view.addSubview(button2)
         view.addSubview(button3)
@@ -209,6 +248,8 @@ class ViewController: UIViewController {
         view.addSubview(buttonMinus)
         view.addSubview(buttonMulti)
         view.addSubview(buttonDivision)
+//        view.addSubview(buttonPoint)
+        view.addSubview(buttonCancel)
         view.addSubview(buttonResult)
         
         
