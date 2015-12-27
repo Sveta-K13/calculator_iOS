@@ -18,6 +18,7 @@ class Calculator {
     var operation = "="
     var operand_1:Double = 0
     var isFirstDigit = true
+    var isDecimal = false
     var isWaitOperand = false
     
     var displayText: String {
@@ -48,10 +49,21 @@ class Calculator {
         if digit != "0" {
             isFirstDigit = false
         }
-
     }
     
+    func decimalPoint() {
+        if  !isDecimal {
+            displayText = isFirstDigit ? "0," : displayText + ","
+            isFirstDigit = false
+            isDecimal = true
+    
+        }
+    }
+
+
+    
     func chooseOperation(operation:String) {
+        isDecimal = false
         if !isWaitOperand {
             calculate()
         }
@@ -68,6 +80,7 @@ class Calculator {
     
     func calculate() {
         isWaitOperand = false
+        isDecimal = false
         switch operation {
         case "÷":displayValue = operand_1 / displayValue
         case "×":displayValue *= operand_1
