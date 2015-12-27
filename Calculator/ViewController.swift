@@ -11,6 +11,7 @@ import UIKit
 private let SCREEN_W:CGFloat = UIScreen.mainScreen().bounds.width
 private let MARGIN:CGFloat = 10
 private let BTN_W:CGFloat = (SCREEN_W / 4) - MARGIN * 2
+private let LABEL_W:CGFloat = SCREEN_W - MARGIN * 2
 private let BTN_RES_W:CGFloat = SCREEN_W - MARGIN * 2
 private let BTN_TAB:CGFloat = MARGIN * 2 + BTN_W
 private let BTN_TAB_H:CGFloat = MARGIN + BTN_W
@@ -30,7 +31,7 @@ class ViewController: UIViewController {
     
  
     lazy var displayLabel: UILabel = {
-        let v = UILabel(frame: CGRect(x: MARGIN, y: MARGIN * 2, width: SCREEN_W-16, height: LABEL_H))
+        let v = UILabel(frame: CGRect(x: MARGIN, y: MARGIN * 2, width: LABEL_W, height: LABEL_H))
         v.text = "0"
         v.textAlignment = NSTextAlignment.Right
         v.layer.cornerRadius = 5
